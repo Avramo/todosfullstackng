@@ -1,0 +1,7 @@
+<p>todos-page works!</p>
+
+
+<mat-accordion>
+    <app-todo *ngFor='let td of tdSVC.todosObs | async' [td]='td'></app-todo>
+</mat-accordion>
+

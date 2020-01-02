@@ -1,0 +1,17 @@
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       {{ td.title }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
+        ID: {{ td.todoID }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>UserID: {{ td.userID }}</p>
+    <p>Body: {{ td.body }}</p>
+    <p>Created: {{ td.created }}</p>
+    <mat-checkbox (change)='onCompletedChange($event)' [checked]='td.completed' labelPosition='before'>Completed </mat-checkbox>
+  </mat-expansion-panel>
