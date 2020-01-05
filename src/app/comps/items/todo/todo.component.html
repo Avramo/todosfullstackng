@@ -3,15 +3,15 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-       {{ td.title }}
+       {{ todo.title }} 
       </mat-panel-title>
       <mat-panel-description>
         <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
-        ID: {{ td.todoID }}
+        ID: {{ todo.todoID }}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>UserID: {{ td.userID }}</p>
-    <p>Body: {{ td.body }}</p>
-    <p>Created: {{ td.created }}</p>
-    <mat-checkbox (change)='onCompletedChange($event)' [checked]='td.completed' labelPosition='before'>Completed </mat-checkbox>
+    <p>UserID: {{ todo.userID }}</p>
+    <p>Body: {{ todo.body }}</p>
+    <p>Created: {{ todo.created }}</p>
+    <mat-checkbox (change)='completedChanged($event.checked)' [checked]='todo.completed' labelPosition='before'>Completed </mat-checkbox>
   </mat-expansion-panel>

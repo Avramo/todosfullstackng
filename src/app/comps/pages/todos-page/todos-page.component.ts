@@ -8,9 +8,20 @@ import { TodosService } from 'src/app/services/todos.service';
 })
 export class TodosPageComponent implements OnInit {
 
+  todosVisible:boolean = true;
+  toggleView:string = 'Show Todos';
   
   constructor(private tdSVC:TodosService) { }
 
+  toggleTodos(){
+    this.todosVisible = ! this.todosVisible;
+    if (this.todosVisible) {
+      this.toggleView ='Hide Todos'
+    }
+    if (! this.todosVisible) {
+      this.toggleView ='Show Todos'
+    }
+  }
   ngOnInit() {
   }
 

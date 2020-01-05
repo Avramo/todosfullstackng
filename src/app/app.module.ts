@@ -9,12 +9,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AppComponent } from './app.component';
 import { TodosPageComponent } from './comps/pages/todos-page/todos-page.component';
 import { TodoComponent } from './comps/items/todo/todo.component';
+import { AddTodoFormComponent } from './comps/pages/add-todo-form/add-todo-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosPageComponent,
-    TodoComponent
+    TodoComponent,
+    AddTodoFormComponent
   ],
   imports: [
     BrowserModule,

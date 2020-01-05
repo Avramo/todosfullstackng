@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ReplaySubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Todo } from '../models/todo';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { error } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +20,22 @@ export class TodosService {
     http.get(this.baseAPI)
       .subscribe(todosData => this.replaySubjectTodos.next(todosData as Todo[])) 
   }
+
+  /// on 'completed' checkbox changed
+
+  onCompletedChange(id:number, completed:boolean){
+    return this.http.patch(this.baseAPI+'/'+ id, {"completed":completed})
+     .pipe(tap( () => {
+              console.log("PATCH call successful value returned in body ");
+            },//end tap log
+            error => {
+                console.error("PATCH call in error", error);
+            },//end errr
+            () => {
+                console.log("PATCH in TODO id:" + id +",  COMPLETED:"+ completed);
+            }//end obs completes
+          )//end tap
+     );//end pipe
+   }
+ 
 }

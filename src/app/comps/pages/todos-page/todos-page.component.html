@@ -1,7 +1,13 @@
 <p>todos-page works!</p>
 
-
-<mat-accordion>
-    <app-todo *ngFor='let td of tdSVC.todosObs | async' [td]='td'></app-todo>
-</mat-accordion>
+<button mat-raised-button color="accent" (click)="toggleTodos()">{{ toggleView }}</button>
+<br>
+<br>
+<button mat-raised-button color="primary" routerLink='/add-todo-form'>Add New Todo</button>
+<br>
+<br>
+    <mat-accordion *ngIf="this.todosVisible">
+        <app-todo *ngFor='let td of tdSVC.todosObs | async' [todo]='td'></app-todo>
+    </mat-accordion>
+    
 

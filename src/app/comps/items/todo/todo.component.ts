@@ -10,28 +10,29 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodoComponent implements OnInit {
 
-  @Input() td:Todo;
-  
+  @Input() todo:Todo;
+
   constructor(private tdSVC:TodosService, private http:HttpClient) { }
 
-  onCompletedChange(event){
-    this.http.patch(this.tdSVC.baseAPI+'/'+this.td.todoID, {"completed":event.checked})
-    .subscribe(
-      (val) => {
-          console.log("PATCH call successful value returned in body", 
-                      val);
+
+  completedChanged(completed:boolean){
+    // this.tdSVC.onCompletedChange(event, this.td)
+    this.tdSVC.onCompletedChange(this.todo.todoID, completed).subscribe(()=>{
+        console.log("TodoComponent completedChanged subscribe next done");
+
+      },//next/subscribe
+      err => {
+        console.error("todo id:" +this.todo.todoID + ", PATCH error");
       },
-      response => {
-          console.log("PATCH call in error", response);
-      },
-      () => {
-          console.log("The PATCH observable is now completed.");
-    });
+      ()=>{
+        console.log("todo id:" +this.todo.todoID + ", PATCH completed");
+      }//end completed
+    )
   }
+
 
   ngOnInit() {
   }
-
 
 
 }
