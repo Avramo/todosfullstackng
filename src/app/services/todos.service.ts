@@ -37,5 +37,12 @@ export class TodosService {
           )//end tap
      );//end pipe
    }
+   getTodoById(id){
+     return this.http.get(this.baseAPI+'/'+id)
+      .pipe(tap(
+              ()=> console.log('TodosService  getTodoById  pipe tap!!')
+            )//end tap
+        )//end pipe
+   }
  
 }

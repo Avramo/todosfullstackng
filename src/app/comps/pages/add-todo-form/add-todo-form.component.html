@@ -1,24 +1,43 @@
-<p>add-todo-form works!</p>
+<h1>Create | Edit -- Todo Form</h1>
+
 <button mat-raised-button color="primary" routerLink="/todos">Back to All Todos</button>
 
+<br><br>
+
+<h3>Choose Form Mode: </h3>
+<mat-radio-group aria-label="Select an option" (change)="formMode = ($event.value)">
+  <mat-radio-button [checked]="true" value="Create">Create New Todo </mat-radio-button>
+  <mat-radio-button value="Edit">Edit Todo </mat-radio-button>
+</mat-radio-group>
+
+<h2>{{ formMode }} Todo Form</h2> 
 <div class="new-todo-form">
-    <mat-form-field>
-      <input matInput placeholder="Title">
-    </mat-form-field>
-  
-    <mat-form-field>
-      <textarea matInput placeholder="Body"></textarea>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <textarea matInput placeholder="Created"></textarea>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-select placeholder="Select">
-        <mat-option value="option">Option</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  todoID:number
-    userID:number
+
+    <div *ngIf="formMode == 'Edit'">
+      <label>Todo ID</label>
+      <input type="number" matInput placeholder="Todo ID" id="todoID" (blur)="getinfoById($event.target.value)">
+    </div>
+    
+    <div>
+      <label>User ID</label>
+      <input type="number" matInput placeholder="User ID" id="userID">
+    </div>
+    
+    <div>
+      <label>Title</label>
+      <input matInput placeholder="Title" id="title" >
+    </div>
+    
+    <div>
+      <label>Body</label>
+      <textarea matInput placeholder="Body" id="body"></textarea>
+    </div>
+    
+    <div>
+      <label>Date Created</label>
+      <input type="date" pattern="\d{4}-\d{2}-\d{2}" id="created">
+    </div>
+    
+    <button mat-raised-button color="primary" (click)="submitTodo()">{{ formMode }}</button> 
+</div>
+

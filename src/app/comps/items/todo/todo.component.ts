@@ -17,7 +17,8 @@ export class TodoComponent implements OnInit {
 
   completedChanged(completed:boolean){
     // this.tdSVC.onCompletedChange(event, this.td)
-    this.tdSVC.onCompletedChange(this.todo.todoID, completed).subscribe(()=>{
+    this.tdSVC.onCompletedChange(this.todo.todoID, completed).subscribe(
+      ()=>{
         console.log("TodoComponent completedChanged subscribe next done");
 
       },//next/subscribe

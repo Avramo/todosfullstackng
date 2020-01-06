@@ -1,0 +1,23 @@
+.new-todo-form{
+    display: flexbox;
+    position: relative;
+    left: 25%;
+    width: 400px;
+    background-color: mediumslateblue;
+    justify-content: center;
+}
+mat-form-field{
+    justify-content: center;
+
+}
+input, textarea{
+    background-color: rgb(166, 152, 240);
+}
+h1, h2, h3{
+    text-align: center;
+}
+mat-radio-group{
+    color: purple;
+    display: flex;
+    justify-content: space-evenly;
+}
