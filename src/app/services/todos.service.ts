@@ -25,7 +25,9 @@ export class TodosService {
 
   onCompletedChange(id:number, completed:boolean){
     return this.http.patch(this.baseAPI+'/'+ id, {"completed":completed})
-     .pipe(tap( () => {
+     .pipe(tap( 
+            () => {
+              alert("hello")
               console.log("PATCH call successful value returned in body ");
             },//end tap log
             error => {
