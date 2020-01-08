@@ -9,34 +9,62 @@ import { Todo } from 'src/app/models/todo';
   styleUrls: ['./add-todo-form.component.css']
 })
 export class AddTodoFormComponent implements OnInit {
-
+  todo:Todo = {todoID:null, userID: null, title:null, body:null, created:null, completed:false };
+  newTODO = {userID: null, title:null, body:null, created:null, completed:false };
   formMode:string = "Create";
 
+  // todoID:number = null;
+  // userID:number = null;
+  // title:string = null;
+  // body:string = null;
+  // created:Date = null;
 
   constructor(private todosSVC:TodosService) {}
 
   ngOnInit() {
   }
 
+  formModeChange(mode){
+    this.formMode = mode;
+    document.querySelector('form').reset();
+  }
 
   getinfoById(id){
-    this.todosSVC.getTodoById(id).subscribe(
-      (resultTodo:Todo)=>{
-      // alert(resultTodo.title)
-      // FIX THIS value error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      document.getElementById('userID').value = resultTodo.userID+'' ;
-      document.getElementById('title').value = resultTodo.title ;
-      document.getElementById('body').value = resultTodo.body ;
-      document.getElementById('created').value = resultTodo.created+'' ;
-     
+    if (id) {
+      this.todosSVC.getTodoById(id).subscribe(
+        (resultTodo:Todo)=>{
+          this.todo = resultTodo;
+         console.log(this.todo);
+        }
+        
+      )
     }
-      
-    )
 
   }
 
-  submitTodo(event){
-    alert(event)
+  submitTodo(){
+    alert(this.todo.created)
+    this.todo.created =  new Date;
+    alert(this.todo.created)
+
+    console.log('AddTodoFormComponent ', "submitTodo() ",this.formMode);
+    console.log(this.todo);
+    if (this.formMode == 'Create') {
+      // this.newTODO = this.todo;
+      this.todosSVC.createNewTodo(this.todo)
+        .subscribe(
+          (response) => {
+           console.log("AddTodoFormComponent submitTodo() created new todo -> ",response);
+          },
+          (error)=>{
+            console.error('submitTodo() createNewTodo() failed ' , error);
+            
+          }
+        )//end subscribe
+    }
+    
+    
+    
   }
 
 }

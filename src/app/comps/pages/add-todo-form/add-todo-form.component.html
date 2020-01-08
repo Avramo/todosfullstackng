@@ -5,39 +5,39 @@
 <br><br>
 
 <h3>Choose Form Mode: </h3>
-<mat-radio-group aria-label="Select an option" (change)="formMode = ($event.value)">
+<mat-radio-group aria-label="Select an option"  (change)="formModeChange($event.value)">
   <mat-radio-button [checked]="true" value="Create">Create New Todo </mat-radio-button>
   <mat-radio-button value="Edit">Edit Todo </mat-radio-button>
 </mat-radio-group>
 
 <h2>{{ formMode }} Todo Form</h2> 
-<div class="new-todo-form">
+<form class="new-todo-form">
 
     <div *ngIf="formMode == 'Edit'">
       <label>Todo ID</label>
-      <input type="number" matInput placeholder="Todo ID" id="todoID" (blur)="getinfoById($event.target.value)">
+      <input type="number" matInput placeholder="Todo ID" [(ngModel)]='todo.todoID' name="todoID" (blur)="getinfoById($event.target.value)">
     </div>
     
     <div>
       <label>User ID</label>
-      <input type="number" matInput placeholder="User ID" id="userID">
+      <input type="number" matInput placeholder="User ID" name="userID" [(ngModel)]='todo.userID' >
     </div>
     
     <div>
       <label>Title</label>
-      <input matInput placeholder="Title" id="title" >
+      <input type="text" matInput placeholder="Title" name="title" [(ngModel)]='todo.title'>
     </div>
     
     <div>
       <label>Body</label>
-      <textarea matInput placeholder="Body" id="body"></textarea>
+      <textarea matInput placeholder="Body" name="body" [(ngModel)]='todo.body'></textarea>
     </div>
     
-    <div>
+    <!-- <div>
       <label>Date Created</label>
-      <input type="date" pattern="\d{4}-\d{2}-\d{2}" id="created">
-    </div>
+      <input type="date"  name="created" [(ngModel)]='todo.created'> 
+    </div> -->
     
     <button mat-raised-button color="primary" (click)="submitTodo()">{{ formMode }}</button> 
-</div>
+  </form>
 

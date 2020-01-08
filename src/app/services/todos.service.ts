@@ -46,5 +46,16 @@ export class TodosService {
             )//end tap
         )//end pipe
    }
+
+   // called from create form
+   createNewTodo(newTodo){
+     return this.http.post(this.baseAPI + '/' ,newTodo)
+      .pipe(tap(
+          ()=>{
+            console.log("TodosService createNewTodo() started", newTodo);
+          }
+        )//end tap
+      )//end pipe
+   }
  
 }
