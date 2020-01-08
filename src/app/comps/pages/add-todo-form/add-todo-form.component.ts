@@ -43,14 +43,11 @@ export class AddTodoFormComponent implements OnInit {
   }
 
   submitTodo(){
-    alert(this.todo.created)
-    this.todo.created =  new Date;
-    alert(this.todo.created)
 
     console.log('AddTodoFormComponent ', "submitTodo() ",this.formMode);
     console.log(this.todo);
     if (this.formMode == 'Create') {
-      // this.newTODO = this.todo;
+      this.todo.created =  new Date;
       this.todosSVC.createNewTodo(this.todo)
         .subscribe(
           (response) => {
@@ -58,6 +55,18 @@ export class AddTodoFormComponent implements OnInit {
           },
           (error)=>{
             console.error('submitTodo() createNewTodo() failed ' , error);
+            
+          }
+        )//end subscribe
+    }
+    else{
+      this.todosSVC.editTodo(this.todo, this.todo.todoID)
+        .subscribe(
+          (response) => {
+           console.log("AddTodoFormComponent submitTodo() editTodo() edited todo -> ",response);
+          },
+          (error)=>{
+            console.error('submitTodo() editTodo() failed ' , error);
             
           }
         )//end subscribe

@@ -57,5 +57,16 @@ export class TodosService {
         )//end tap
       )//end pipe
    }
+
+   //edit todo called from form
+   editTodo(editTodo, id){
+    return this.http.put(this.baseAPI + '/' + id , editTodo)
+     .pipe(tap(
+         ()=>{
+           console.log("TodosService editTodo() started", editTodo);
+         }
+       )//end tap
+     )//end pipe
+  }
  
 }
