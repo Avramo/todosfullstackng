@@ -12,12 +12,12 @@ export class TodoComponent implements OnInit {
 
   @Input() todo:Todo;
 
-  constructor(private tdSVC:TodosService, private http:HttpClient) { }
+  constructor(private todosSVC:TodosService, private http:HttpClient) { }
 
 
   completedChanged(completed:boolean){
-    // this.tdSVC.onCompletedChange(event, this.td)
-    this.tdSVC.onCompletedChange(this.todo.todoID, completed).subscribe(
+    // this.todosSVC.onCompletedChange(event, this.td)
+    this.todosSVC.onCompletedChange(this.todo.todoID, completed).subscribe(
       ()=>{
         console.log("TodoComponent completedChanged subscribe next done");
 
@@ -29,6 +29,23 @@ export class TodoComponent implements OnInit {
         console.log("todo id:" +this.todo.todoID + ", PATCH completed");
       }//end completed
     )
+  }
+
+  removeTodo(todoID){
+    let conf = confirm("Are you sure you want to DELETE this todo? \n This CAN'T be undone!")
+    if (conf == true) {
+      this.todosSVC.deleteTodo(todoID).subscribe(
+        (result) => {
+          console.log("TodoComponent removeTodo() removed = ", result);
+        },
+        (error)=>{
+          console.error('TodoComponent removeTodo() failed ' , error);
+        },
+      )
+      
+      window.location.reload()
+    }
+    
   }
 
 

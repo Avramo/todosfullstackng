@@ -6,9 +6,7 @@ import { MatModule } from './modules/material-module.module';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
-import { MatFormField } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { TodosPageComponent } from './comps/pages/todos-page/todos-page.component';
@@ -17,6 +15,7 @@ import { AddTodoFormComponent } from './comps/pages/add-todo-form/add-todo-form.
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,27 @@
+.todoContainer{
+    position: relative;
+    left: 25%;
+    width: 50%;
+    display: flex; 
+    justify-content: space-between;
+    margin: 5px;
+}
+mat-expansion-panel{
+width: 90%;
+min-width: 270px;
+max-width: 500px;
+  
+}
+mat-expansion-panel-header{
+    display: flex; 
+    align-content: space-between;
+}
+.left{
+    align-content: flex-start;
+}
+.center{
+    align-content: center;
+}
+.right{
+    align-content: flex-end;
+}

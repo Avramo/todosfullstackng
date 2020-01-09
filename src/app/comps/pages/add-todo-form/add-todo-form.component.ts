@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from 'src/app/services/todos.service';
 import { Todo } from 'src/app/models/todo';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,6 @@ import { Todo } from 'src/app/models/todo';
 })
 export class AddTodoFormComponent implements OnInit {
   todo:Todo = {todoID:null, userID: null, title:null, body:null, created:null, completed:false };
-  newTODO = {userID: null, title:null, body:null, created:null, completed:false };
   formMode:string = "Create";
 
   // todoID:number = null;
@@ -27,6 +27,7 @@ export class AddTodoFormComponent implements OnInit {
   formModeChange(mode){
     this.formMode = mode;
     document.querySelector('form').reset();
+    
   }
 
   getinfoById(id){
@@ -43,12 +44,12 @@ export class AddTodoFormComponent implements OnInit {
   }
 
   submitTodo(){
-
+    let privateTODO:Todo = {...this.todo}//testtttttttttttttttttttttttttttttt
     console.log('AddTodoFormComponent ', "submitTodo() ",this.formMode);
-    console.log(this.todo);
+    console.log("todo = ",this.todo);
     if (this.formMode == 'Create') {
-      this.todo.created =  new Date;
-      this.todosSVC.createNewTodo(this.todo)
+      // this.todo.created =  new Date;
+      this.todosSVC.createNewTodo(privateTODO)//this.todo
         .subscribe(
           (response) => {
            console.log("AddTodoFormComponent submitTodo() created new todo -> ",response);
@@ -59,19 +60,23 @@ export class AddTodoFormComponent implements OnInit {
           }
         )//end subscribe
     }
-    else{
-      this.todosSVC.editTodo(this.todo, this.todo.todoID)
+    else{ //is an edit / PUT request
+      // this.todosSVC.editTodo(this.todo, this.todo.todoID)
+      confirm("Are you sure you want to edit this todo?");
+      this.todosSVC.editTodo(privateTODO, privateTODO.todoID)
         .subscribe(
           (response) => {
            console.log("AddTodoFormComponent submitTodo() editTodo() edited todo -> ",response);
+              //clears all form field  and therefor also this.todo via ngModel.
+              document.querySelector('form').reset();
           },
           (error)=>{
-            console.error('submitTodo() editTodo() failed ' , error);
-            
+            console.error('submitTodo() editTodo() failed ' , error)
+            alert('ERROR! edit failed: ' + error) 
           }
         )//end subscribe
     }
-    
+
     
     
   }

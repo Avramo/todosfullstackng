@@ -1,17 +1,28 @@
+<div class="todoContainer">
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
 
-<mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-       {{ todo.title }} 
-      </mat-panel-title>
-      <mat-panel-description>
-        <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
-        ID: {{ todo.todoID }}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>UserID: {{ todo.userID }}</p>
-    <p>Body: {{ todo.body }}</p>
-    <p>Created: {{ todo.created }}</p>
-    <mat-checkbox (change)='completedChanged($event.checked)' [checked]='todo.completed' labelPosition='before'>Completed </mat-checkbox>
+          <mat-panel-title class="left">
+          {{ todo.title }} 
+          </mat-panel-title>
+
+          <mat-panel-description class="center">
+            <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
+            ID: {{ todo.todoID }}
+          </mat-panel-description>
+
+          <mat-panel-description class="right">
+            <mat-icon aria-hidden="false" (click)="removeTodo(todo.todoID)">delete</mat-icon>
+          </mat-panel-description>
+
+      </mat-expansion-panel-header>
+
+      <p>UserID: {{ todo.userID }}</p>
+      <p>Body: {{ todo.body }}</p>
+      <p>Created: {{ todo.created }}</p>
+      <mat-checkbox (change)='completedChanged($event.checked)' [checked]='todo.completed' labelPosition='before'>Completed </mat-checkbox>
   </mat-expansion-panel>
+    
+  
+</div>

@@ -9,7 +9,7 @@ import { TodosService } from 'src/app/services/todos.service';
 export class TodosPageComponent implements OnInit {
 
   todosVisible:boolean = true;
-  toggleView:string = 'Show Todos';
+  toggleView:string = 'Hide Todos';
   
   constructor(private tdSVC:TodosService) { }
 

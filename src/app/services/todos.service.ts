@@ -25,7 +25,7 @@ export class TodosService {
 
   onCompletedChange(id:number, completed:boolean){
     return this.http.patch(this.baseAPI+'/'+ id, {"completed":completed})
-     .pipe(tap( 
+    .pipe(tap( 
             () => {
               alert("hello")
               console.log("PATCH call successful value returned in body ");
@@ -37,36 +37,47 @@ export class TodosService {
                 console.log("PATCH in TODO id:" + id +",  COMPLETED:"+ completed);
             }//end obs completes
           )//end tap
-     );//end pipe
-   }
-   getTodoById(id){
-     return this.http.get(this.baseAPI+'/'+id)
-      .pipe(tap(
-              ()=> console.log('TodosService  getTodoById  pipe tap!!')
-            )//end tap
-        )//end pipe
-   }
+    );//end pipe
+  }
 
-   // called from create form
-   createNewTodo(newTodo){
-     return this.http.post(this.baseAPI + '/' ,newTodo)
-      .pipe(tap(
-          ()=>{
-            console.log("TodosService createNewTodo() started", newTodo);
-          }
-        )//end tap
-      )//end pipe
-   }
+  getTodoById(id){
+    return this.http.get(this.baseAPI+'/'+id)
+    .pipe(tap(
+            ()=> console.log('TodosService  getTodoById  pipe tap!!')
+          )//end tap
+    )//end pipe
+  }
 
-   //edit todo called from form
-   editTodo(editTodo, id){
+  // called from create form
+  createNewTodo(newTodo){
+    return this.http.post(this.baseAPI + '/' ,newTodo)
+    .pipe(tap(
+        ()=>{
+          console.log("TodosService createNewTodo() started", newTodo);
+        }
+      )//end tap
+    )//end pipe
+  }
+
+  //edit todo called from form
+  editTodo(editTodo, id){
     return this.http.put(this.baseAPI + '/' + id , editTodo)
-     .pipe(tap(
-         ()=>{
-           console.log("TodosService editTodo() started", editTodo);
-         }
-       )//end tap
-     )//end pipe
+    .pipe(tap(
+        ()=>{
+          console.log("TodosService editTodo() started", editTodo);
+        }
+      )//end tap
+    )//end pipe
+  }
+
+  deleteTodo(id){
+    return this.http.delete(this.baseAPI + '/' + id)
+    .pipe(tap(
+        ()=>{
+          console.log("TodosService deleteTodo() started todoI: ", id);
+        }
+      )//end tap
+    )//end pipe
   }
  
 }
