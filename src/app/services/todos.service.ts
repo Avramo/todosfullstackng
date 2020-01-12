@@ -27,7 +27,6 @@ export class TodosService {
     return this.http.patch(this.baseAPI+'/'+ id, {"completed":completed})
     .pipe(tap( 
             () => {
-              alert("hello")
               console.log("PATCH call successful value returned in body ");
             },//end tap log
             error => {

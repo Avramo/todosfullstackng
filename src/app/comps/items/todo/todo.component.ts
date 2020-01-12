@@ -15,20 +15,28 @@ export class TodoComponent implements OnInit {
   constructor(private todosSVC:TodosService, private http:HttpClient) { }
 
 
-  completedChanged(completed:boolean){
+  completedChanged(MatCheckboxChange ){ //completed:boolean
     // this.todosSVC.onCompletedChange(event, this.td)
-    this.todosSVC.onCompletedChange(this.todo.todoID, completed).subscribe(
-      ()=>{
-        console.log("TodoComponent completedChanged subscribe next done");
+    console.log("completed checked event: ", MatCheckboxChange);
+    
+    let conf = confirm("Are you sure you want to Check/Uncheck this todo?")
+    if (conf == true) {
+      this.todosSVC.onCompletedChange(this.todo.todoID, MatCheckboxChange.checked).subscribe(
+        ()=>{
+          console.log("TodoComponent completedChanged subscribe next done");
 
-      },//next/subscribe
-      err => {
-        console.error("todo id:" +this.todo.todoID + ", PATCH error");
-      },
-      ()=>{
-        console.log("todo id:" +this.todo.todoID + ", PATCH completed");
-      }//end completed
-    )
+        },//next/subscribe
+        err => {
+          console.error("todo id:" +this.todo.todoID + ", PATCH error");
+        },
+        ()=>{
+          console.log("todo id:" +this.todo.todoID + ", PATCH completed");
+        }//end completed
+      )
+    }
+    else{
+      MatCheckboxChange.source.checked = ( ! MatCheckboxChange.source.checked )
+    }
   }
 
   removeTodo(todoID){
@@ -37,13 +45,13 @@ export class TodoComponent implements OnInit {
       this.todosSVC.deleteTodo(todoID).subscribe(
         (result) => {
           console.log("TodoComponent removeTodo() removed = ", result);
+          window.location.reload()
         },
         (error)=>{
           console.error('TodoComponent removeTodo() failed ' , error);
         },
       )
       
-      window.location.reload()
     }
     
   }

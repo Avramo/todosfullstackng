@@ -45,6 +45,7 @@ export class AddTodoFormComponent implements OnInit {
 
   submitTodo(){
     let privateTODO:Todo = {...this.todo}//testtttttttttttttttttttttttttttttt
+    privateTODO.created += "T00:00:00.000Z";
     console.log('AddTodoFormComponent ', "submitTodo() ",this.formMode);
     console.log("todo = ",this.todo);
     if (this.formMode == 'Create') {

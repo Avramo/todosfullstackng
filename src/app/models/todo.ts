@@ -3,6 +3,6 @@ export class Todo {
     userID:number
     title:string
     body:string
-    created:Date
+    created:string
     completed:boolean
 }

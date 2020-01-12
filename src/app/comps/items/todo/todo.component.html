@@ -21,7 +21,7 @@
       <p>UserID: {{ todo.userID }}</p>
       <p>Body: {{ todo.body }}</p>
       <p>Created: {{ todo.created }}</p>
-      <mat-checkbox (change)='completedChanged($event.checked)' [checked]='todo.completed' labelPosition='before'>Completed </mat-checkbox>
+      <mat-checkbox (change)='completedChanged($event)' [checked]='todo.completed' labelPosition='before'>Completed </mat-checkbox>
   </mat-expansion-panel>
     
   
